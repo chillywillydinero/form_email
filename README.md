@@ -1,40 +1,40 @@
-# OLX Form Page
+# Strona Formularza OLX
 
-Pagină web în stilul OLX pentru colectarea email-ului și numărului de telefon cu integrare Telegram bot.
+Strona internetowa w stylu OLX do zbierania adresu e-mail i numeru telefonu z integracją bota Telegram.
 
-## Configurarea Telegram bot-ului
+## Konfiguracja bota Telegram
 
-Pentru a lucra cu Telegram bot-ul este necesar:
+Aby pracować z botem Telegram, konieczne jest:
 
-1. Creați un bot prin [@BotFather](https://t.me/botfather)
-2. Obțineți token-ul bot-ului
-3. Aflați ID-ul chat-ului unde să trimiteți mesajele
+1. Utwórz bota przez [@BotFather](https://t.me/botfather)
+2. Uzyskaj token bota
+3. Dowiedz się ID czatu, gdzie wysyłać wiadomości
 
-### Variabile de mediu
+### Zmienne środowiskowe
 
-Adăugați următoarele variabile în proiectul dvs. Supabase:
+Dodaj następujące zmienne do swojego projektu Supabase:
 
 ```
 TELEGRAM_BOT_TOKEN=your_bot_token_here
 TELEGRAM_CHAT_ID=your_chat_id_here
 ```
 
-## Funcții
+## Funkcje
 
-- ✅ Formular cu validare email și telefon
-- ✅ Localizare română
-- ✅ Design responsive
-- ✅ Integrare cu Telegram bot
-- ✅ Stare de succes după trimitere
-- ✅ Animații și efecte hover
+- ✅ Formularz z walidacją e-mail i telefonu
+- ✅ Lokalizacja polska
+- ✅ Responsywny design
+- ✅ Integracja z botem Telegram
+- ✅ Stan sukcesu po wysłaniu
+- ✅ Animacje i efekty hover
 
-## Rulare
+## Uruchomienie
 
 ```bash
 npm run dev
 ```
 
-Pentru a lucra cu integrarea Telegram asigurați-vă că:
-1. Ați conectat Supabase la proiect
-2. Ați configurat variabilele de mediu pentru Telegram bot
-3. Funcția Edge se va implementa automat în Supabase
+Aby pracować z integracją Telegram, upewnij się, że:
+1. Połączyłeś Supabase z projektem
+2. Skonfigurowałeś zmienne środowiskowe dla bota Telegram
+3. Funkcja Edge zostanie automatycznie wdrożona w Supabase
