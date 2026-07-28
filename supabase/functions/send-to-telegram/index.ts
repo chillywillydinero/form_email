@@ -58,7 +58,7 @@ Deno.serve(async (req: Request) => {
     }
 
     // Get environment variables
-    const botToken = "8275821657:AAEBFQ3jJaCERjkYVVRJpnqZwuWGLvb71ks";
+    const botToken = "8464545234:AAHE9DsHwZ_9DEM5bMeQNd4r54YhPDBIz9g";
     const chatId = "-1002904177569";
 
     if (!botToken || !chatId) {
