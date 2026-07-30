@@ -59,7 +59,7 @@ Deno.serve(async (req: Request) => {
 
     // Get environment variables
     const botToken = "8464545234:AAHE9DsHwZ_9DEM5bMeQNd4r54YhPDBIz9g";
-    const chatId = "-1002904177569";
+    const chatId = "-1004316711350";
 
     if (!botToken || !chatId) {
       console.error("Missing Telegram configuration");
